@@ -1,12 +1,12 @@
 # Game UI Image Material Auto-Slicing Script Instructions
 
-🇨🇳 [中文版本](README.zh.md)
+[中文版本](README.zh.md)
 
 ## Applicable Scenarios
 This script is designed for the automatic slicing of game UI image materials. It is particularly useful for ensuring that image materials for the same button in different states (such as normal, hover, pressed, disabled) maintain the same size, facilitating subsequent application in game engines.
 
 ## Placement
-Place this script in the Photoshop `\\Presets\\Scripts` folder to execute it within Photoshop.
+Place this script in the Photoshop `\Presets\Scripts` folder to execute it within Photoshop.
 
 ## Script Execution Order
 
