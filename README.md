@@ -10,35 +10,35 @@ Place this script in the Photoshop `\Presets\Scripts` folder to execute it withi
 
 ## Script Execution Order
 
-1. **Create Temporary File**: Create a duplicate of the current file.
-   
-2. **Merge `#` Layer Groups**: Merge all layers within layer groups that have `#` in their name.
-   
-3. **Rename and Move `@` Layer Groups**: Rename layer groups containing `@`, move them to the top level, and remove the `@` symbol.
-   
-4. **Remove Empty Layer Groups**: Delete all empty layer groups.
-   
-5. **Convert to Smart Object**: Convert top-level layer groups into smart objects for further processing.
-   
-6. **Adjust Image Size**: Adjust the dimensions of the smart object, ensuring the width and height are even numbers.
-   
-7. **Save as PNG**: Save the image as a PNG file based on the layer names, and classify them according to specific rules.
-   
-8. **Clean Up and Complete**: Close and delete temporary files, completing the process.
+1. **Create a Temporary File**: Create a duplicate of the current file.
+
+2. **Delete Excluded Layer Groups**: Remove top-level layer groups with names containing `!` and all invisible top-level layer groups, including their subgroups.
+
+3. **Merge `#` Layer Groups and Process `$` Layers**: Merge all layers within layer groups whose names contain `#`, and copy layers starting with `$` into the same level `@` layer groups.
+
+4. **Rename and Move `@` Layer Groups**: Rename layer groups containing `@`, move them to the top level, and remove the `@` symbol.
+
+5. **Remove Empty Layer Groups**: Delete all empty layer groups.
+
+6. **Convert to Smart Object and Resize Image**: Convert the top-level layer groups to smart objects and resize the image to ensure even dimensions.
+
+7. **Save, Clean Up, and Complete**: Save the image as a PNG file according to the layer names and organize them based on specific rules. Then close and delete the temporary file, completing the process.
 
 ## Symbol Explanation
 
 <p align="center">
-  <img src="screenshot/Snipaste_2024-08-25_16-20-12.png" alt="screenshot 1" width="45%" />
+  <img src="screenshot/Snipaste_2024-08-30_22-37-30.png" alt="screenshot 1" width="45%" />
   <img src="screenshot/Snipaste_2024-08-25_16-24-54.png" alt="screenshot 2" width="45%" />
 </p>
 
 
-- **"@"**: Indicates that this layer group should be exported, and the exported image name will combine with the name of its parent layer group. For example, the layer group `@hover` will be named `btn_minus_hover.png` after export.
-   
-- **"#"**: Indicates that this layer group will have its layers merged to ensure that the exported image is not affected. For example, the layer group `#disabled` will merge all internal layers before exporting the image.
-   
+- **"@"**: Indicates that this layer group needs to be exported, and the exported image name will combine with its parent layer group name. For example, the `@hover` layer group will be exported as `btn_minus_hover.png`.
+
+- **"#"**: Indicates that this layer group will be merged to ensure it does not affect the exported image. For example, the `#Merge` layer group will merge all its internal layers before exporting the image.
+
 - **"!"**: Indicates that this layer group will be ignored during export and will not appear in the final exported images.
+
+- **"$"**: Indicates that this layer will be copied into the same level `@` layer groups and subsequently converted into a smart object in the following steps to ensure consistent image dimensions across multiple variants. For example, the `$ButtonMerge` layer will be copied into all the same level `@` layer groups.
 
 ## Exported Image Naming Rules
 
@@ -57,8 +57,8 @@ The script will automatically adjust the size of the exported images to ensure t
 
 The exported images will be automatically classified based on the suffixes in their names:
 
-- **Locale**: Classified by different languages (e.g., CNY, ENU).
-- **num_**: Files with numeric names.
-- **Common**: Files that do not match other classifications.
+- **Locale**: Categorized by different languages (e.g., CNY, ENU).
+- **num_**: Files with numeric names (e.g., 55, number_48).
+- **Common**: Files that do not match other categories.
 
 To modify the classification rules, users can edit the `determineFolder` function in the script to change the classification logic.
